@@ -30,20 +30,20 @@ var utils = {
         return result;
     },
 
-    checkInteger: function(input) {
+    checkInteger: function (input) {
         var re = '/^[1-9]+[0-9]*]*$/';
 
-         if (!re.test(input.rate.value)) {
-             return false;
-         }
-         return true;
+        if (!re.test(input.rate.value)) {
+            return false;
+        }
+        return true;
     },
 
-    fix2number: function(n) {
-        return [0,n].join('').slice(-2);
+    fix2number: function (n) {
+        return [0, n].join('').slice(-2);
     },
 
-    getTime: function(format) {
+    getTime: function (format) {
         var curDate = new Date();
         if (format == undefined) return curDate;
         format = format.replace(/YYYY/i, curDate.getFullYear());
@@ -58,7 +58,41 @@ var utils = {
 
     getPricisionAmount: function (amount, pricision) {
         return Math.round(amount * Math.pow(10, pricision)) / Math.pow(10, pricision);
+    },
+    //build standard response
+    retData: function (error, data) {
+        var response = {};
+        if (error) {
+            response.code = 500;
+            response.success = false;
+            response.message = error.message;
+            response.data = error;
+            console.log("===Error=== ", JSON.stringify(response));
+        } else {
+            response.code = 200;
+            response.success = true;
+            response.message = "";
+            response.data = data;
+        }
+        return response;
+    },
+
+    retJson: function (err, data) {
+        var response = utils.retData(err,data);
+        if (err) {
+            console.log("err: " + err);
+        }
+        return JSON.stringify(response);
+    },
+
+    trys:function(res,buzCb){
+        try {
+            buzCb();
+        } catch (error) {
+            res.end(utils.retJson(error, null));         
+        }
     }
+
 };
 
 module.exports = utils;

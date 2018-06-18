@@ -3,6 +3,7 @@ FROM  sparkchain/moac_node10:0.8.2
 
 #COPY .  /app/
 COPY bin/  /app/bin/
+COPY client/  /app/client/
 COPY modules/  /app/modules/
 COPY app.js  /app/app.js
 COPY package.json  /app/package.json

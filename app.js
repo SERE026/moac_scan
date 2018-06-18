@@ -29,18 +29,22 @@ process.on('uncaughtException', function(err) {
     process.exit(1);
 });
 
-// var path = require('path');
+var path = require('path');
 var express = require('express');
 // var cookieParser = require('cookie-parser');
-// var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 
 var app = express();
 // view engine setup
-// app.use(express.query());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: false}));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(express.query());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 // app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'client')));
 
 var routes = require('./routes');
 routes(app);

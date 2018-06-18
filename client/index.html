@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Moac流水查询器</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="stylesheet" href="assets/layui/css/layui.css" media="all">
+
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <script src="./assets/js/flexible.js"></script>
+  <script src="./assets/js/jquery.js"></script>
+  <script src="./assets/layui/layui.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+  <div id="wrap">
+    <p class="share">Moac流水查询器</p>
+    <div class="form" autocomplete="on">
+      <div class="putin">
+        <div class="rowSearch">
+          <span>钱包地址:</span>
+          <input type="text" class="walletAddr" style=" display: inline-block;" id="fromSrc" name="fromSrc" placeholder="请输入MOAC源钱包地址"
+            class="hoder" autocomplete="on"></input>
+        </div>
+        <div class="rowSearch">
+          <span>钱包地址:</span>
+          <input type="text" class="walletAddr" id="toDest" placeholder="请输入MOAC目标钱包地址" class="hoder" autocomplete="on"></input>
+        </div>
+        <div class="rowSearch">
+          <span>交易时间:</span>
+          <input id="startTime" class="tradeTime" type="date" />
+          <span>-</span>
+          <input id="endTime" class="tradeTime" type="date" />
+        </div>
+        <div class="rowSearch">
+          <span>交易金额:</span>
+          <input id="amountLow" class="tradeAmount" type="text" />
+          <span>-</span>
+          <input id="amountUper" class="tradeAmount" type="text" />
+        </div>
+        <div class="rowSearch">
+          <span>Gas范围:</span>
+          <input id="gasLow" class="tradeAmount" type="text" />
+          <span>-</span>
+          <input id="gasUper" class="tradeAmount" type="text" />
+        </div>
+        <div class="rowSearch">
+          <span>GasPrice:</span>
+          <input id="gasPrice" class="walletAddr" type="text" />
+        </div>
+        <div class="rowSearch">
+          <span>nonce范围:</span>
+          <input id="nouceLow" class="tradeAmount" type="text" />
+          <span>-</span>
+          <input id="nouceUper" class="tradeAmount" type="text" />
+        </div>
+        <div class="rowSearch">
+          <span>关键字:</span>
+          <input id="memos" class="walletAddr" type="text" />
+        </div>
+      </div>
+      <div class="submit">
+        <button value="提交" id="sub1" class="btn1">提 交</button>
+      </div>
+    </div>
+    <div id="main" style="display:none">
+      <div class="loading-gif"></div>
+      <div class="loading-text">查询中...</div>
+    </div>
+  </div>
+
+  <table class="layui-table" lay-data="{id: 'data1'}" id="data1"></table>
+
+
+  <script>
+    //// from  startTime  endTime  amountLow  amountUper  to  gasPrice  gasLow  gasUper  nouceLow nouceUper memos
+    // 对Date的扩展，将 Date 转化为指定格式的String   
+    // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，   
+    // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)   
+    // 例子：   
+    // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423   
+    // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18   
+    Date.prototype.format = function (fmt) {
+      var o = {
+        "M+": this.getMonth() + 1, //月份   
+        "d+": this.getDate(), //日   
+        "h+": this.getHours(), //小时   
+        "m+": this.getMinutes(), //分   
+        "s+": this.getSeconds(), //秒   
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度   
+        "S": this.getMilliseconds() //毫秒   
+      };
+      if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+      return fmt;
+    }
+
+    var tableIns = null;
+    var buildWhere = function () {
+
+      var obj = {
+        from: $("#fromSrc").val(),
+        startTime: $("#startTime").val(),
+        endTime: $("#endTime").val(),
+        amountLow: $("#amountLow").val(),
+        amountUper: $("#amountUper").val(),
+        to: $("#toDest").val(),
+        gasPrice: $("#gasPrice").val(),
+        gasLow: $("#gasLow").val(),
+        gasUper: $("#gasUper").val(),
+        nouceLow: $("#nouceLow").val(),
+        nouceUper: $("#nouceUper").val(),
+        memos: $("#memos").val(),
+      }
+
+      alert(JSON.stringify(obj));
+      return obj;
+
+    }
+    $(function () {
+      $("#sub1").click(function () {
+        var table = layui.table;
+        tableIns.reload({
+          url: '/searchForPage',
+          where: buildWhere(),
+          method: 'post',
+          page: {
+            curr: 1 //重新从第 1 页开始
+          }
+        });
+      });
+
+    });
+
+    layui.use('table', function () {
+      var table = layui.table;
+
+      tableIns = table.render({
+        elem: '#data1',
+        url: '/searchForPage',
+        where: buildWhere(),
+        method: 'post',
+        page: true,
+        request: {
+          pageName: 'pageNum',
+          limitName: 'pageSize'
+        },
+        //response: {}  , 
+        cellMinWidth: 80,
+        done: function (res, curr, count) {
+          //如果是异步请求数据方式，res即为你接口返回的信息。
+          //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+          console.log(res);
+          //得到当前页码
+          console.log(curr);
+          //得到数据总量
+          console.log(count);
+        },
+        cols: [
+          [{
+              field: 'block_number',
+              width: 80,
+              title: '区块号',
+              sort: true
+            }, {
+              field: 'from_src',
+              width: 280,
+              title: '源账户'
+            }, {
+              field: 'gas',
+              width: 80,
+              title: 'gas(-18)',
+              sort: true,
+              //templet: function (d) {
+              // alert(d.value)
+              // return (d.gas / Math.pow(10, 18)) + ""
+              // }
+            }, {
+              field: 'gas_price',
+              width: 120,
+              title: 'gasPrice(-18)',
+              //  templet: function (d) {
+              // alert(d.value)
+              //return (d.gas_price / Math.pow(10, 18)) + ""
+              //}
+            },
+            {
+              field: 'value',
+              width: 140,
+              title: '金额',
+              templet: function (d) {
+                // alert(d.value)
+                return (d.value / Math.pow(10, 18)) + ""
+              }
+            },
+
+            {
+              field: 'to_dest',
+              width: 280,
+              title: '目标账户'
+            },
+            {
+              field: 'input_utf8',
+              title: '文本内容'
+            },
+            {
+              field: 'nonce',
+              title: 'nonce'
+            },
+            {
+              field: 'tradetime',
+              width: 180,
+              title: '交易时间',
+              templet: function (d) {
+                // alert(d.value)
+                return new Date(d.tradetime * 1000).format("yyyy-MM-dd hh:mm:ss");
+                // return (d.tradetime / Math.pow(10, 18)) + ""
+              }
+
+            }
+
+          ]
+        ]
+      });
+    });
+  </script>
+
+  <script>
+    // {
+    //   "id": "0xc819c84689fa396dd150606aa7346405e58b79b04bc737fa84f086a9c5beb760",
+    //   "block_hash": "0x02131cf60a2710380c76eed5c5bbe7a07f8473bc1fc3aa085d386eda8fa90f40",
+    //   "block_number": 316611,
+    //   "from_src": "0x4e61606baa1e7c2a04e2dde1bff1cd8b3f17b661",
+    //   "gas": 90000,
+    //   "gas_price": 20000000000,
+    //   "hash": "0xc819c84689fa396dd150606aa7346405e58b79b04bc737fa84f086a9c5beb760",
+    //   "input": "0x",
+    //   "nonce": 76291,
+    //   "syscnt": "0x0",
+    //   "to_dest": "0xc16f00621f918269906ef5f07db4ce051e4ab345",
+    //   "transaction_index": 1,
+    //   "value": 517128663000000000,
+    //   "v": "0xea",
+    //   "r": "0xd8a2b284d6fcbfc7bf29bb8759cb36c8a150fb5e17bca83e6d848a1f11394f85",
+    //   "s": "0x74f2480d2439ee34832d3d4aae1f1ebfa4e6fc88e84de1c40131ad2f166086e4",
+    //   "sharding_flag": "0x0",
+    //   "tradetime": 1529238086,
+    //   "createtime": 1529238101925,
+    //   "input_assicc": "",
+    //   "input_utf8": null
+    // },
+  </script>
+</body>
+
+</html>

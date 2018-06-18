@@ -1,0 +1,163 @@
+#wrap {
+    margin-top: 10px;
+}
+
+li {
+    margin-top: 20px;
+    text-align: center;
+    list-style: none;
+}
+
+.logo-logo .logo-img {
+    display: block;
+    margin: 37px auto 0;
+    border-radius: 50%;
+}
+
+.logo-logo .logo-text {
+    display: inline-block;
+    font-size: .32rem;
+}
+
+.share {
+    color: #991e23;
+    line-height: 32px;
+    font-size: .3rem;
+    text-align: center;
+    font-family: serif;
+    letter-spacing: 2px;
+}
+
+.family {
+    font-family: monospace;
+    padding: 1px 37px;
+    margin-top: 27px;
+    font-size: .3rem;
+    text-align: center;
+    line-height: 2;
+}
+
+.input {
+    width: 100%;
+    margin-top: .1rem;
+}
+
+.input .hoder {
+    width: 4rem;
+    height: 0.5rem;
+    display: block;
+    margin: 0 auto;
+}
+
+.form {
+    margin-top: .1rem;
+    width: 100%;
+}
+
+.form .days {
+    width: 7rem;
+    margin: 0 auto;
+}
+
+.putin {
+    margin-top: .1rem;
+    text-align: center;
+}
+
+.putin p {
+    /*  text-align: center;*/
+    font-size: 9px;
+    color: #999;
+    /* display: inline-block;*/
+}
+
+
+.putin .rowSearch {
+    margin-top: 0.1rem;
+   
+   
+}
+
+
+.putin  input {
+    width: 3rem;
+    height: .4rem;
+    margin-left: 3px;
+    /*text-align: center; */
+    border-radius: 5%;
+    /* padding: .1rem .2rem .1rem .1rem;*/
+    border: 1px solid #999;
+    font-size: 9px;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.putin .walletAddr {
+    width: 5.2rem;
+}
+
+.putin .tradeTime {
+    width: 2.5rem;
+}
+
+.putin .tradeAmount {
+    width: 2.5rem;
+}
+
+.submit .btn1 {
+    width: 3rem;
+    display: block;
+    margin: 5px auto;
+    height: .6rem;
+    background-color: #fe566d;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    color: #fff;
+    /*font-size: .35rem;*/
+    font-size: 20px;
+}
+
+.chakan {
+    font-size: .34rem;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 60px;
+    padding: 5px 5px;
+    font-family: serif;
+}
+
+.btn-login {
+    color: #26AEF2;
+    font-weight: 800;
+}
+
+/* .box-table{
+    margin: 0 auto;
+}
+.box-table .table{
+    max-width: 7rem;
+    display: inline-block;
+}
+.box-table .table thead,
+.box-table .table tbody{
+    width: 100%;
+} */
+
+.box-table {
+    width: 7rem;
+    margin: 0 auto;
+}
+
+.icon-iconfontquestion {
+    color: #77BFF3;
+}
+
+.CNT {
+    font-weight: 800;
+}
+
+.box-table p {
+    font-size: 20px;
+    margin: 0;
+}

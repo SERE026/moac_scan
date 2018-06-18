@@ -1,6 +1,4 @@
-/**
- * Created by heipacker on 2017/6/11 0023.
- */
+
 var BlockMonitor = require('./BlockMonitor');
 
 module.exports = function (app) {
