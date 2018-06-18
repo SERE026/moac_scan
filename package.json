@@ -1,0 +1,27 @@
+{
+  "name": "moac-trans-explore",
+  "version": "0.0.1",
+  "private": true,
+  "author": "mgicode.com",
+  "scripts": {
+    "start": "node bin/www.js"
+  },
+  "dependencies": {
+    "node-mysql": "^0.4.2",
+    "body-parser": "^1.18.2",
+    "chain3": "^0.1.5",
+    "config": "^1.28.1",
+    "express": "^4.16.2",
+    "multer": "^1.3.0",
+    "node-uuid": "",
+    "keccak": "",
+    "keythereum": "",
+    "number-to-bn": "^1.7.0",
+    "secp256k1": "",
+    "solc": "^0.4.21",
+    "underscore": "^1.9.0",
+    "eth-lib": "^0.2.8",
+    "ethereumjs-tx": "^1.3.4",
+    "web3": "^1.0.0-beta.34"
+  }
+}
