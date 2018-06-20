@@ -11,8 +11,12 @@ const BlockRead = function () {
         }
         try {
             tx.memos = chain3.toUtf8(txInfo.input);
-        } catch (error) {}
+        } catch (error) { }
 
+        var receipt = chain3.mc.getTransactionReceipt(txhash);
+        
+        console.log("receipt");
+        console.log(receipt);
         return tx;
     }
 
@@ -23,8 +27,8 @@ const BlockRead = function () {
 
         BlockSave.saveTx(txInfo);
 
-       // console.log("##############txInfo:" + txhash + "###########");
-       // console.log(txInfo);
+        console.log("##############txInfo:" + txhash + "###########");
+        console.log(txInfo);
 
     }
 
@@ -46,8 +50,8 @@ const BlockRead = function () {
                 console.error(error);
                 return;
             }
-         //   console.log("##############blockInfo###########");
-          //  console.log(result);
+            console.log("##############blockInfo###########");
+            console.log(result);
 
             saveBlock(result);
         });
@@ -56,7 +60,7 @@ const BlockRead = function () {
 
     return {
         save: function (hash) {
-           // console.log("##############blockHash:" + hash + "##############");
+            console.log("##############blockHash:" + hash + "##############");
             getBlockInfo(hash);
         }
     }

@@ -5,11 +5,11 @@ module.exports = function (app) {
     
     if (!process.env.DISABLE_WRITE) {
         BlockRouter(app);
-    }
-    if (!process.env.DISABLE_READ) {
+   }
+   if (!process.env.DISABLE_READ) {
         TxRouter(app);
-    }
+   }
     if (!process.env.DISABLE_CONSUL) {
         ConsulRouter(app);
-    }
+   }
 };

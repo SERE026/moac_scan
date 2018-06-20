@@ -15,7 +15,7 @@ var pool = mysql.createPool(dbConfig);
 
 
 var query = function (sql, options, callback) {
-    // console.log(sql);
+     console.log(sql +",  "+options);
     //  console.log(options);
     pool.getConnection(function (err, conn) {
         if (err) {
@@ -23,8 +23,8 @@ var query = function (sql, options, callback) {
             callback(err, null, null);
         } else {
             conn.query(sql, options, function (err, results, fields) {
-                // console.log(results);
-                // console.log(err);
+                 console.log(results);
+                 console.log(err);
                 //释放连接  
                 conn.release();
                 //事件驱动回调  

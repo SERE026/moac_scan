@@ -13,7 +13,7 @@ drop table if exists waterflow_info;
 /*==============================================================*/
 create table block_info
 (
-   id                   varchar(50) not null,
+   id                   varchar(100) not null,
    hash                 varchar(500),
    gas_limit            bigint,
    gas_used             bigint,
@@ -32,9 +32,9 @@ create table block_info
    timestamp            bigint,
    total_difficulty     varchar(2000),
    transactions_root    varchar(1000),
-   transactions         text comment '½ö½ö±£´æ',
+   transactions         text comment ,
    uncles               text,
-   createtime           datetime,
+   createtime           bigint,
    primary key (id)
 );
 
@@ -43,7 +43,7 @@ create table block_info
 /*==============================================================*/
 create table waterflow_info
 (
-   id                   varchar(50) not null,
+   id                   varchar(100) not null,
    block_hash           varchar(500),
    block_number         bigint,
    from_src             varchar(500),
@@ -55,13 +55,13 @@ create table waterflow_info
    syscnt               varchar(500),
    to_dest              varchar(500),
    transaction_index    bigint,
-   value                bigint,
+   value                bigint,/**æœ‰å¯èƒ½å­˜ä¸äº†**/
    v                    text,
    r                    text,
    s                    text,
    sharding_flag        varchar(500),
    tradetime            bigint,
-   createtime           datetime,
+   createtime           bigint,
    input_assicc         text,
    input_utf8           text
 );
