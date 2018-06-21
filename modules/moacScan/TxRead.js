@@ -97,17 +97,31 @@ const TxRead = function () {
         }
 
         //交易金额段查询
+        // if (!!params.amountLow) {
+        //     where = where + " and  value >=?";
+        //     var leAmount = Math.pow(10, 18) * params.amountLow;
+        //     arr.push(leAmount);
+        // }
+        // if (!!params.amountUper) {
+        //     where = where + " and  value <=?";
+        //     var geAmount = Math.pow(10, 18) * params.amountUper;
+        //     arr.push(geAmount);
+        // }
+
+        // change by pengrk
         if (!!params.amountLow) {
-            where = where + " and  value >=?";
+            where = where + " and   cast(value as signed) >=?";
             var leAmount = Math.pow(10, 18) * params.amountLow;
             arr.push(leAmount);
         }
         if (!!params.amountUper) {
-            where = where + " and  value <=?";
+            where = where + " and   cast(value as signed) <=?";
             var geAmount = Math.pow(10, 18) * params.amountUper;
             arr.push(geAmount);
         }
 
+
+       
         //指定目标账户
         if (!!params.to) {
             where = where + " and  to_dest =?";

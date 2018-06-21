@@ -10,7 +10,7 @@ var BlockMonitor = {
             if (error) {
                 console.log("filter_start error: ", error);
             } else {
-                BlockRead. save(log);
+                BlockRead.save(log);
             }
         });
         console.log("Start latest filter!");
