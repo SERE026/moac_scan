@@ -278,13 +278,13 @@ const TxRead = function () {
 
         var query = select + where + orderby + limit;
         var count = " select count(*) as total from waterflow_info " + where + ";";
-        console.log("###########################search##########################");
-        console.log(query);
-        console.log(count)
+       // console.log("###########################search##########################");
+       // console.log(query);
+       // console.log(count)
         //count +
         mysql.query(count, arr,
             function (err, rs, fields) {
-                console.log("count:" + rs);
+              //  console.log("count:" + rs);
                 mysql.query(query, arr,
                     function (err1, rs1, fields1) {
                         var data = {
@@ -330,8 +330,8 @@ const TxRead = function () {
 
         var query = select + where + orderby + limit;
         var count = " select count(*) from waterflow_info " + where + ";";
-        console.log("###########################search##########################");
-        console.log(count)
+       // console.log("###########################search##########################");
+      //  console.log(count)
         //count +
         mysql.query(count, arr,
             function (err, rs, fields) {

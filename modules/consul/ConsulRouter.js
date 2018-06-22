@@ -8,9 +8,9 @@ module.exports = function (app) {
         var data = {
             "details": {}, "status": { "code": "UP", "description": "" }
         }
-        console.log("############################################");
-        console.log("########/actuator/health#########");
-        console.log(data);
+       // console.log("############################################");
+      //  console.log("########/actuator/health#########");
+      //  console.log(data);
         res.end(JSON.stringify(data));
     });
     const options = {

@@ -1,23 +1,18 @@
 
 var BlockMonitor = require('./BlockMonitor');
-
+var BlockRead = require('./BlockRead');
+var Utils = require("../common/Utils")
 module.exports = function (app) {
 
     BlockMonitor.start();
-    // /**
-    //  * 获取红包信息
-    //  */
-    // app.get('/v1/gift', function (req, res, next) {
-    //     GiftRequest.getGift(req, function (err, redPackage) {
-    //         if (err) {
-    //             next(err);
-    //         } else {
-    //             res.send({
-    //                 code: 0,
-    //                 data: redPackage
-    //             });
-    //         }
-    //     });
-    // });
+
+    app.get("/init", function (req, res) {
+        Utils.trys(res, function () {
+            console.log("####################enter trys########################333"); //mike
+            BlockRead.initUnDownBloack();
+            res.end(Utils.retJson("", {}));
+
+        })
+    });
 
 };

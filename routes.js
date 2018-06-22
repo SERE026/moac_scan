@@ -10,6 +10,6 @@ module.exports = function (app) {
         TxRouter(app);
    }
     if (!process.env.DISABLE_CONSUL) {
-        ConsulRouter(app);
+      //  ConsulRouter(app);
    }
 };

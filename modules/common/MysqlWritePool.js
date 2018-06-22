@@ -19,6 +19,7 @@ var query = function (sql, options, callback) {
     pool.getConnection(function (err, conn) {
         if (err) {
             console.log(err);
+            conn.release();
             callback(err, null, null);
         } else {
             conn.query(sql, options, function (err, results, fields) {

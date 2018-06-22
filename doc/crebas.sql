@@ -32,7 +32,7 @@ create table block_info
    timestamp            bigint,
    total_difficulty     varchar(2000),
    transactions_root    varchar(1000),
-   transactions         text comment ,
+   transactions         text ,
    uncles               text,
    createtime           bigint,
    primary key (id)
@@ -55,7 +55,7 @@ create table waterflow_info
    syscnt               varchar(500),
    to_dest              varchar(500),
    transaction_index    bigint,
-   value                bigint,/**有可能存不了**/
+   value                varchar(500),/**有可能存不了**/
    v                    text,
    r                    text,
    s                    text,
