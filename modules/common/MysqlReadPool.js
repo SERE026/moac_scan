@@ -38,6 +38,7 @@ module.exports = {
 };
 
 
+
 // var query=require("./lib/mysql_pool");  
 
 // query("select * from table where id=?", [1], function(err,results,fields){  
