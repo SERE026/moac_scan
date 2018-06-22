@@ -13,7 +13,6 @@ var dbConfig = {
 
 var pool = mysql.createPool(dbConfig);
 
-
 var query = function (sql, options, callback) {
     // console.log(sql +",  "+options);
     //  console.log(options);
