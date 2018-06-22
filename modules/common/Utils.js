@@ -78,21 +78,21 @@ var utils = {
     },
 
     retJson: function (err, data) {
-        var response = utils.retData(err,data);
+        var response = utils.retData(err, data);
         if (err) {
             console.log("err: " + err);
         }
         return JSON.stringify(response);
     },
 
-    trys:function(res,buzCb){
+    trys: function (res, buzCb) {
         try {
             buzCb();
         } catch (error) {
-            res.end(utils.retJson(error, null));         
+            res.end(utils.retJson(error, null));
         }
     }
-
+     
 };
 
 module.exports = utils;
